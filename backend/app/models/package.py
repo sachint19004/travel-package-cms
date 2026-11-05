@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
@@ -45,4 +47,16 @@ class Package(Base):
         DateTime(timezone=True),
         server_default=func.now(),
         onupdate=func.now()
+    )
+
+    prices = relationship(
+    "SeasonalPrice",
+    backref="package",
+    cascade="all, delete-orphan"
+    )
+
+    versions = relationship(
+    "PackageVersion",
+    backref="package",
+    cascade="all, delete-orphan"
     )
