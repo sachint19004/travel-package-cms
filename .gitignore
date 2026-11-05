@@ -1,5 +1,27 @@
-node_modules/ 
-.next/ 
-venv/ 
-__pycache__/ 
-.env 
+# Frontend
+node_modules/
+.next/
+
+# Backend
+venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Testing
+.pytest_cache/
+
+# Build
+dist/
+build/
