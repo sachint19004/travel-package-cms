@@ -8,6 +8,9 @@ from app.core.security import (
     verify_password,
     create_access_token
 )
+from app.auth.dependencies import (
+    get_current_user
+)
 
 router = APIRouter(
     prefix="/auth",
@@ -54,3 +57,27 @@ def login(
     return {
         "access_token": token
     }
+
+@router.get("/me")
+def me(
+    current_user=Depends(
+        get_current_user
+    )
+):
+    return {
+        "id": current_user.id,
+        "name": current_user.name,
+        "email": current_user.email,
+        "role": current_user.role
+    }
+
+def require_admin(current_user=Depends(get_current_user)):
+
+    if current_user.role != "ADMIN":
+
+        raise HTTPException(
+            status_code=403,
+            detail="Access Denied"
+        )
+
+    return current_user
