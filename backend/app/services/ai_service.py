@@ -9,6 +9,7 @@ from app.core.config import settings
 def extract_enquiry_details(message: str):
 
     try:
+        
         genai.configure(
                 api_key=settings.GEMINI_API_KEY
             )
