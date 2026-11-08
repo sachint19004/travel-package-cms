@@ -11,6 +11,10 @@ from app.schemas.enquiry import (
     EnquiryCreate
 )
 
+from app.services.ai_service import (
+    extract_enquiry_details
+)
+
 router = APIRouter(
     prefix="/enquiries",
     tags=["Enquiries"]
@@ -21,11 +25,16 @@ def create_enquiry(
     enquiry: EnquiryCreate,
     db: Session = Depends(get_db)
 ):
+    extraction = extract_enquiry_details(
+        enquiry.message
+    )
+
     new_enquiry = Enquiry(
         name=enquiry.name,
         email=enquiry.email,
         phone=enquiry.phone,
-        message=enquiry.message
+        message=enquiry.message,
+        ai_extraction=extraction
     )
 
     db.add(new_enquiry)
