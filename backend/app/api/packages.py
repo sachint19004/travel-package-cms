@@ -180,3 +180,9 @@ def get_package_versions(
     )
 
     return versions
+
+@router.get("/")
+def get_packages(
+    db: Session = Depends(get_db)
+):
+    return db.query(Package).all()
