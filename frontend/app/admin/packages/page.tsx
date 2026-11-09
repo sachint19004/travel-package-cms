@@ -15,14 +15,75 @@ export default function AdminPackagesPage() {
   return (
     <div
       style={{
-        padding: "30px",
-        background: "#f1f5f9",
         minHeight: "100vh",
+        background: "#f1f5f9",
+        padding: "30px",
       }}
     >
-      <h1 style={{ marginBottom: "20px" }}>
-        Package Management
+      <h1
+        style={{
+          fontSize: "2.5rem",
+          marginBottom: "20px",
+        }}
+      >
+        Admin Dashboard
       </h1>
+
+      <div
+        style={{
+          display: "flex",
+          gap: "12px",
+          marginBottom: "30px",
+        }}
+      >
+        <a
+          href="/admin/packages"
+          style={{
+            background: "#2563eb",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "8px",
+          }}
+        >
+          📦 Packages
+        </a>
+
+        <a
+          href="/admin/enquiries"
+          style={{
+            background: "#0f766e",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "8px",
+          }}
+        >
+          📨 Enquiries
+        </a>
+
+        <a
+          href="/packages"
+          style={{
+            background: "#7c3aed",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "8px",
+          }}
+        >
+          🌍 Public Site
+        </a>
+
+        <a
+          href="/"
+          style={{
+            background: "#475569",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "8px",
+          }}
+        >
+          🏠 Home
+        </a>
+      </div>
 
       {packages.map((pkg) => (
         <div
@@ -32,7 +93,8 @@ export default function AdminPackagesPage() {
             padding: "20px",
             marginBottom: "20px",
             borderRadius: "12px",
-            boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
+            boxShadow:
+              "0 5px 15px rgba(0,0,0,0.1)",
           }}
         >
           <h2>{pkg.title}</h2>
@@ -40,7 +102,9 @@ export default function AdminPackagesPage() {
           <p>{pkg.description}</p>
 
           <p>
-            {pkg.days} Days / {pkg.nights} Nights
+            <strong>
+              {pkg.days} Days / {pkg.nights} Nights
+            </strong>
           </p>
 
           <p>{pkg.hotels}</p>
