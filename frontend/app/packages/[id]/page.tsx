@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function PackageDetailPage({
+export default function PackageDetailsPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -11,9 +11,7 @@ export default function PackageDetailPage({
 
   useEffect(() => {
     params.then((value) => {
-      fetch(
-        `http://127.0.0.1:8000/packages/${value.id}`
-      )
+      fetch(`http://127.0.0.1:8000/packages/${value.id}`)
         .then((res) => res.json())
         .then((data) => setPkg(data))
         .catch(console.error);
@@ -21,26 +19,53 @@ export default function PackageDetailPage({
   }, [params]);
 
   if (!pkg) {
-    return <div>Loading...</div>;
+    return <div style={{ padding: "2rem" }}>Loading...</div>;
   }
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>{pkg.title}</h1>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#f8fafc",
+        padding: "40px",
+      }}
+    >
+      <div
+        style={{
+          background: "white",
+          padding: "30px",
+          borderRadius: "16px",
+          maxWidth: "900px",
+          margin: "0 auto",
+          boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+        }}
+      >
+        <h1>{pkg.title}</h1>
 
-      <p>{pkg.description}</p>
+        <p>{pkg.description}</p>
 
-      <p>
-        {pkg.days} Days / {pkg.nights} Nights
-      </p>
+        <hr />
 
-      <h3>Hotels</h3>
+        <h3>Trip Duration</h3>
 
-      <p>{pkg.hotels}</p>
+        <p>
+          {pkg.days} Days / {pkg.nights} Nights
+        </p>
 
-      <h3>Inclusions</h3>
+        <h3>Hotels</h3>
 
-      <p>{pkg.inclusions}</p>
+        <p>{pkg.hotels}</p>
+
+        <h3>Inclusions</h3>
+
+        <p>{pkg.inclusions}</p>
+
+        <h3>Itinerary</h3>
+
+        <pre>
+          {JSON.stringify(pkg.itinerary, null, 2)}
+        </pre>
+      </div>
     </div>
   );
 }

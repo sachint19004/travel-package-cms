@@ -8,30 +8,38 @@ export default function EnquiriesPage() {
   useEffect(() => {
     fetch("http://127.0.0.1:8000/enquiries/")
       .then((res) => res.json())
-      .then((data) => {
-        setEnquiries(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .then((data) => setEnquiries(data))
+      .catch(console.error);
   }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Enquiry Inbox</h1>
+    <div
+      style={{
+        padding: "30px",
+        background: "#f1f5f9",
+        minHeight: "100vh",
+      }}
+    >
+      <h1>AI Enquiry Inbox</h1>
 
       {enquiries.map((e) => (
         <div
           key={e.id}
           style={{
-            border: "1px solid #ddd",
-            padding: "1rem",
-            marginBottom: "1rem",
+            background: "white",
+            padding: "20px",
+            marginTop: "20px",
+            borderRadius: "12px",
+            boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
           }}
         >
           <h2>{e.name}</h2>
+
           <p>{e.email}</p>
+
           <p>{e.message}</p>
+
+          <h4>AI Extraction</h4>
 
           <pre>
             {JSON.stringify(

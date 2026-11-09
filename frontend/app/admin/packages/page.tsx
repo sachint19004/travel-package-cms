@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function PackagesPage() {
+export default function AdminPackagesPage() {
   const [packages, setPackages] = useState<any[]>([]);
 
   useEffect(() => {
@@ -13,17 +13,26 @@ export default function PackagesPage() {
   }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Travel Packages</h1>
+    <div
+      style={{
+        padding: "30px",
+        background: "#f1f5f9",
+        minHeight: "100vh",
+      }}
+    >
+      <h1 style={{ marginBottom: "20px" }}>
+        Package Management
+      </h1>
 
       {packages.map((pkg) => (
         <div
           key={pkg.id}
           style={{
-            border: "1px solid #ddd",
-            padding: "1rem",
-            marginBottom: "1rem",
-            borderRadius: "8px",
+            background: "white",
+            padding: "20px",
+            marginBottom: "20px",
+            borderRadius: "12px",
+            boxShadow: "0 5px 15px rgba(0,0,0,0.1)",
           }}
         >
           <h2>{pkg.title}</h2>
@@ -34,9 +43,7 @@ export default function PackagesPage() {
             {pkg.days} Days / {pkg.nights} Nights
           </p>
 
-          <a href={`/packages/${pkg.id}`}>
-            View Details
-          </a>
+          <p>{pkg.hotels}</p>
         </div>
       ))}
     </div>

@@ -8,41 +8,73 @@ export default function PackagesPage() {
   useEffect(() => {
     fetch("http://127.0.0.1:8000/packages/")
       .then((res) => res.json())
-      .then((data) => {
-        setPackages(data);
-      })
+      .then((data) => setPackages(data))
       .catch(console.error);
   }, []);
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Travel Packages</h1>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#f8fafc",
+        padding: "40px",
+      }}
+    >
+      <h1
+        style={{
+          fontSize: "3rem",
+          marginBottom: "30px",
+          textAlign: "center",
+        }}
+      >
+        Explore Travel Packages
+      </h1>
 
-      {packages.map((pkg) => (
-        <div
-          key={pkg.id}
-          style={{
-            border: "1px solid #ddd",
-            padding: "1rem",
-            marginBottom: "1rem",
-            borderRadius: "8px",
-          }}
-        >
-          <h2>{pkg.title}</h2>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(320px,1fr))",
+          gap: "20px",
+        }}
+      >
+        {packages.map((pkg) => (
+          <div
+            key={pkg.id}
+            style={{
+              background: "white",
+              borderRadius: "16px",
+              padding: "24px",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+            }}
+          >
+            <h2>{pkg.title}</h2>
 
-          <p>{pkg.description}</p>
+            <p>{pkg.description}</p>
 
-          <p>
-            {pkg.days} Days / {pkg.nights} Nights
-          </p>
+            <p>
+              <strong>
+                {pkg.days} Days / {pkg.nights} Nights
+              </strong>
+            </p>
 
-          <p>Hotels: {pkg.hotels}</p>
+            <p>{pkg.hotels}</p>
 
-          <a href={`/packages/${pkg.id}`}>
-            View Package
-          </a>
-        </div>
-      ))}
+            <a
+              href={`/packages/${pkg.id}`}
+              style={{
+                display: "inline-block",
+                marginTop: "12px",
+                background: "#2563eb",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "8px",
+              }}
+            >
+              View Package
+            </a>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
